@@ -1,0 +1,43 @@
+.painting-item {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.painting-item>img {
+    width: 100%;
+    height: auto;
+}
+
+.painting-item__info {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.painting-item__name {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.painting-item__description {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.painting-item__description-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000000;
+}
