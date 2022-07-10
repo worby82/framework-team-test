@@ -11,15 +11,19 @@ const main = cn('main');
 
 const Main = () => {
     const [painting, setPainting] = useState( [] );
-    const [autor, setAutor] = useState( [] );
+    const [author, setAuthor] = useState( [] );
     const [location, setLocation] = useState( [] );
+
     const [totalPages, setTotalPages] = useState( 0 );
-    const [limit, setLimit] = useState( 12 );
     const [page, setPage] = useState( 1 );
+    const limit = 12;
+    
+    const [name, setName] = useState( undefined );
+    const [selectedAuthor, setSelectedAuthor] = useState( undefined )
+    const [selectedLocation, setSelectedLocation] = useState( undefined )
 
     async function fetchPaintings() {
-        const painting = await Api.getPaintings( limit, page );
-        // console.log( painting.headers );
+        const painting = await Api.getPaintings( limit, page, name, selectedAuthor, selectedLocation );
         setPainting( painting.data );
         const totalCount = painting.headers[ 'x-total-count' ];
         setTotalPages( getPageCount( totalCount, limit ) )
@@ -27,9 +31,13 @@ const Main = () => {
 
     let pagesArray = getPagesArray( totalPages );
 
+    const changePage = (linkPage) => {
+        setPage(linkPage);
+    }
+
     async function fetchAuthors() {
-        const autor = await Api.getAuthors();
-        setAutor(autor);
+        const author = await Api.getAuthors();
+        setAuthor(author);
     }
 
     async function fetchLocations() {
@@ -39,22 +47,35 @@ const Main = () => {
 
     useEffect( () => {
         fetchPaintings();
+    }, [ fetchPaintings, page, name, selectedAuthor, selectedLocation ])
+
+    useEffect( () => {
         fetchAuthors();
         fetchLocations();
     }, [])
 
     return(
         <main className={main()}>
-            <Fillter />
+            <Fillter
+                name = { name }
+                setName = { setName }
+                author = { author }
+                selectedAuthor = { selectedAuthor }
+                setSelectedAuthor = { setSelectedAuthor }
+                location = { location }
+                selectedLocation = { selectedLocation }
+                setSelectedLocation = { setSelectedLocation }
+            />
             <PaintingList
                 painting = { painting }
-                autor = { autor }
+                author = { author }
                 location = { location }
             />
             <PaginationList
                 pagesArray = { pagesArray }
                 activePage = { page }
                 totalPages = { totalPages }
+                changePage = { changePage }
             />
         </main>
     )

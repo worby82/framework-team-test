@@ -5,7 +5,7 @@ import './styles.css';
 const cn = withNaming({ n: '', e: '__', m: '--' });
 const paginationList = cn('pagination-list');
 
-const PaginationList = ( { pagesArray, activePage, totalPages } ) => {
+const PaginationList = ( { pagesArray, activePage, totalPages, changePage } ) => {
     return(
         <ul className={ paginationList() }>
             {pagesArray?.map( page => 
@@ -13,6 +13,8 @@ const PaginationList = ( { pagesArray, activePage, totalPages } ) => {
                     page = { page } 
                     activePage = { activePage }
                     totalPages = { totalPages }
+                    changePage = { changePage }
+                    key = { page }
                 />
             )}
         </ul>

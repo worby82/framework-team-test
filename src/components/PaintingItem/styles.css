@@ -1,17 +1,29 @@
 .painting-item {
     width: 100%;
-    height: auto;
+    max-width: 340px;
+    height: 205px;
     border-radius: 20px;
     overflow: hidden;
 }
 
-.painting-item>img {
+.painting-item img {
+    height: 100%;
     width: 100%;
-    height: auto;
+    object-fit: cover;
 }
 
 .painting-item__info {
     background: rgba(255, 255, 255, 0.75);
+    position: relative;
+    z-index: 5;
+    padding: 5px 15px 45px;
+    margin-top: -30px;
+    transition: 0.3s;
+}
+
+.painting-item:hover .painting-item__info {
+    margin-top: -145px;
+    transition: 0.3s;
 }
 
 .painting-item__name {
@@ -22,6 +34,16 @@
     line-height: 20px;
     text-transform: capitalize;
     color: #000000;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 6px;
+}
+
+.painting-item:hover .painting-item__name {
+    white-space: normal;
+    margin-bottom: 6px;
 }
 
 .painting-item__description {
@@ -31,6 +53,7 @@
     font-size: 13px;
     line-height: 20px;
     color: #000000;
+    margin-bottom: 5px;
 }
 
 .painting-item__description-title {
